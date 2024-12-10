@@ -1,0 +1,147 @@
+[gd_scene load_steps=21 format=3 uid="uid://ogmjuikwv58l"]
+
+[ext_resource type="Script" path="res://testes/playerlol.gd" id="1_dl2rm"]
+[ext_resource type="Texture2D" uid="uid://jm5lfkqas0di" path="res://assets/Player/molde_frente-Sheet.png" id="2_m2vt8"]
+[ext_resource type="Texture2D" uid="uid://bd8brgr24drke" path="res://assets/Player/molde_atras-Sheet.png" id="3_hfrud"]
+[ext_resource type="Texture2D" uid="uid://ci21hamj0wl48" path="res://assets/Player/molde_lateral-Sheet.png" id="4_i1hwu"]
+[ext_resource type="Script" path="res://codigo/Camera2D.gd" id="5_tmciq"]
+[ext_resource type="PackedScene" uid="uid://p5x02hhkkbyd" path="res://cenas/ui.tscn" id="6_pkq42"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pryq2"]
+atlas = ExtResource("2_m2vt8")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as11q"]
+atlas = ExtResource("2_m2vt8")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ibo"]
+atlas = ExtResource("2_m2vt8")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mab4j"]
+atlas = ExtResource("2_m2vt8")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysipk"]
+atlas = ExtResource("3_hfrud")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kngrl"]
+atlas = ExtResource("3_hfrud")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjybh"]
+atlas = ExtResource("3_hfrud")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll8ps"]
+atlas = ExtResource("3_hfrud")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik1qj"]
+atlas = ExtResource("4_i1hwu")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20npt"]
+atlas = ExtResource("4_i1hwu")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6t0n"]
+atlas = ExtResource("4_i1hwu")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa14q"]
+atlas = ExtResource("4_i1hwu")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_m3ybn"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pryq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as11q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ibo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mab4j")
+}],
+"loop": true,
+"name": &"baixo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysipk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kngrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjybh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll8ps")
+}],
+"loop": true,
+"name": &"cima",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik1qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20npt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6t0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa14q")
+}],
+"loop": true,
+"name": &"direita",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_awt0c"]
+size = Vector2(13.1238, 27.8281)
+
+[node name="Playerlol" type="CharacterBody2D" groups=["player"]]
+script = ExtResource("1_dl2rm")
+
+[node name="Line2D" type="Line2D" parent="."]
+visible = false
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_m3ybn")
+animation = &"direita"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.604784, -7.24716)
+scale = Vector2(1.00803, 0.814953)
+shape = SubResource("RectangleShape2D_awt0c")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Camera2D2" type="Camera2D" parent="."]
+zoom = Vector2(4, 4)
+position_smoothing_enabled = true
+drag_left_margin = 0.1
+drag_top_margin = 0.1
+drag_right_margin = 0.1
+drag_bottom_margin = 0.1
+script = ExtResource("5_tmciq")
+
+[node name="UI" parent="Camera2D2" instance=ExtResource("6_pkq42")]
+visible = false
+
+[node name="Timer_camera" type="Timer" parent="Camera2D2"]

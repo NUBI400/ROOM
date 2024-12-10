@@ -1,0 +1,69 @@
+[gd_scene load_steps=5 format=3 uid="uid://p5x02hhkkbyd"]
+
+[ext_resource type="Script" path="res://codigo/ui.gd" id="1_gda1q"]
+[ext_resource type="Texture2D" uid="uid://bc7ptepp8j0qj" path="res://assets/icons/hud provisorio.png" id="2_a28nv"]
+[ext_resource type="Texture2D" uid="uid://brv7acghkinxm" path="res://assets/icons/Vida branca.png" id="2_xomhe"]
+[ext_resource type="Texture2D" uid="uid://dk4bpi52k7g3v" path="res://assets/icons/Sprite-0002.png" id="3_d2ftu"]
+
+[node name="UI" type="CanvasLayer"]
+
+[node name="ui" type="Control" parent="."]
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = 5.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("1_gda1q")
+
+[node name="TextureRect" type="TextureRect" parent="ui"]
+layout_mode = 2
+offset_left = 19.0
+offset_top = -31.0
+offset_right = 320.0
+offset_bottom = 176.0
+texture = ExtResource("2_a28nv")
+
+[node name="MarginContainer" type="MarginContainer" parent="ui"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 40
+
+[node name="VBoxContainer" type="VBoxContainer" parent="ui/MarginContainer"]
+layout_mode = 2
+
+[node name="vidabar" type="TextureProgressBar" parent="ui/MarginContainer/VBoxContainer"]
+z_index = 99
+z_as_relative = false
+layout_mode = 2
+size_flags_horizontal = 0
+max_value = 20.0
+value = 10.0
+texture_under = ExtResource("2_xomhe")
+texture_over = ExtResource("3_d2ftu")
+texture_progress = ExtResource("2_xomhe")
+tint_under = Color(0.964706, 0.882353, 1, 1)
+tint_progress = Color(0.909804, 0, 0, 1)
+
+[node name="estaminabar" type="TextureProgressBar" parent="ui/MarginContainer/VBoxContainer"]
+z_index = 99
+z_as_relative = false
+layout_mode = 2
+size_flags_horizontal = 0
+value = 44.0
+texture_under = ExtResource("2_xomhe")
+texture_over = ExtResource("3_d2ftu")
+texture_progress = ExtResource("2_xomhe")
+tint_under = Color(0.964706, 0.882353, 1, 1)
+tint_progress = Color(0.301961, 0.690196, 0, 1)

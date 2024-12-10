@@ -1,0 +1,37 @@
+[gd_scene load_steps=5 format=3 uid="uid://bueb8qs5p5hju"]
+
+[ext_resource type="Script" path="res://testes/CharacterBody2D.gd" id="1_pgp7v"]
+[ext_resource type="Texture2D" uid="uid://d3qvsscabnptn" path="res://icon.svg" id="2_uygv1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x6tky"]
+size = Vector2(126.975, 166.687)
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_0a6et"]
+vertices = PackedVector2Array(1136.06, 302.237, 1135.81, 94.1256, 1279.52, -14.9128, 1290.83, 714.821, 1127.65, 593.187, 3.89624, 7.7146, 816.426, 99.0157, 236.301, 167.693, 9.5531, 709.165, 167.347, 472.098, 290.118, 620.096, 843.428, 647.004)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3), PackedInt32Array(4, 0, 3), PackedInt32Array(5, 2, 1, 6), PackedInt32Array(5, 6, 7), PackedInt32Array(8, 5, 7, 9), PackedInt32Array(8, 9, 10), PackedInt32Array(3, 8, 10, 11), PackedInt32Array(3, 11, 4)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(236.301, 167.693, 816.426, 99.0157, 1135.81, 94.1256, 1136.06, 302.237, 1127.65, 593.187, 843.428, 647.004, 290.118, 620.096, 167.347, 472.098), PackedVector2Array(3.89624, 7.7146, 9.5531, 709.165, 1290.83, 714.821, 1279.52, -14.9128)])
+
+[node name="Main 1" type="Node2D"]
+
+[node name="Line2D" type="Line2D" parent="."]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="."]
+position = Vector2(203.417, 237.32)
+script = ExtResource("1_pgp7v")
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+texture = ExtResource("2_uygv1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(-0.192596, 0.502427)
+scale = Vector2(1.00803, 0.814953)
+shape = SubResource("RectangleShape2D_x6tky")
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="CharacterBody2D"]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Camera2D" type="Camera2D" parent="CharacterBody2D"]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_0a6et")

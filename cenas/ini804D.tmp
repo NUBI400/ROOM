@@ -1,0 +1,146 @@
+[gd_scene load_steps=20 format=3 uid="uid://cv14omk5bijwf"]
+
+[ext_resource type="Texture2D" uid="uid://jm5lfkqas0di" path="res://assets/Player/molde_frente-Sheet.png" id="1_60533"]
+[ext_resource type="Script" path="res://codigo/inimigodetestes.gd" id="1_w436d"]
+[ext_resource type="Texture2D" uid="uid://bd8brgr24drke" path="res://assets/Player/molde_atras-Sheet.png" id="2_2kobb"]
+[ext_resource type="Texture2D" uid="uid://ci21hamj0wl48" path="res://assets/Player/molde_lateral-Sheet.png" id="3_hbcq5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pryq2"]
+atlas = ExtResource("1_60533")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_as11q"]
+atlas = ExtResource("1_60533")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_33ibo"]
+atlas = ExtResource("1_60533")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mab4j"]
+atlas = ExtResource("1_60533")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ysipk"]
+atlas = ExtResource("2_2kobb")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kngrl"]
+atlas = ExtResource("2_2kobb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjybh"]
+atlas = ExtResource("2_2kobb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ll8ps"]
+atlas = ExtResource("2_2kobb")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ik1qj"]
+atlas = ExtResource("3_hbcq5")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20npt"]
+atlas = ExtResource("3_hbcq5")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o6t0n"]
+atlas = ExtResource("3_hbcq5")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wa14q"]
+atlas = ExtResource("3_hbcq5")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ww35j"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pryq2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_as11q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_33ibo")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mab4j")
+}],
+"loop": true,
+"name": &"baixo",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ysipk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kngrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjybh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ll8ps")
+}],
+"loop": true,
+"name": &"cima",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ik1qj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20npt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o6t0n")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wa14q")
+}],
+"loop": true,
+"name": &"direita",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6xpg6"]
+size = Vector2(16, 9)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dhd30"]
+radius = 8.25734
+height = 27.1145
+
+[node name="inimigo" type="CharacterBody2D" node_paths=PackedStringArray("nav_agent")]
+script = ExtResource("1_w436d")
+speed = 50
+recuo = 400
+hp = 4
+nav_agent = NodePath("NavigationAgent2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(0, -10)
+sprite_frames = SubResource("SpriteFrames_ww35j")
+animation = &"direita"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_6xpg6")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(0, -8)
+shape = SubResource("CapsuleShape2D_dhd30")
+
+[node name="Recuo" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
